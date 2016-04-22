@@ -1,9 +1,9 @@
-npm install -g webpack-dev-server
+Start
+------------
 
-npm install
+1. `npm install -g webpack-dev-server`
+2. `npm install`
+3. `npm start`
+4. [http://localhost:8080/](http://localhost:8080/)
 
-npm start
-
-http://localhost:8080/
-
-webpack
+Tada~ :P

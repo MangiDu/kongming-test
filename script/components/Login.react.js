@@ -17,7 +17,8 @@ var Login = React.createClass({
   propTypes: {
     className: ReactPropTypes.string,
     err: ReactPropTypes.string,
-    goToRegister: ReactPropTypes.func.isRequired
+    goToRegister: ReactPropTypes.func.isRequired,
+    isWaiting: ReactPropTypes.bool
   },
 
   getInitialState: function(){
@@ -53,9 +54,9 @@ var Login = React.createClass({
           {err}
           <button
             className="btn btn-primary"
-            disabled={this.state.canSubmit ? '': 'disabled'}
+            disabled={this._getBtnState()}
             ref={REF_MAP.login}
-          >Login</button>
+          >{this._getSubmitBtnText()}</button>
           <a className="btn pull-right" onClick={this.props.goToRegister}>Register</a>
         </form>
       </div>
@@ -81,6 +82,22 @@ var Login = React.createClass({
 
   _focusPwdInput: function(){
     this.refs[REF_MAP.password].focus();
+  },
+
+  _getBtnState: function(){
+    return (this.state.canSubmit && !this.props.isWaiting) ? '': 'disabled';
+  },
+
+  _getSubmitBtnText: function(){
+    var tip = null;
+    if(this.props.isWaiting){
+      tip = (
+        <span>Hold a second ...</span>
+      );
+    }else{
+      tip = ('Login');
+    }
+    return tip;
   }
 })
 

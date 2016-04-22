@@ -38,6 +38,10 @@ function setUiState(state){
   _appData.uiState = state;
 }
 
+function setWaiting(isWaiting){
+  _appData.isWaiting = isWaiting;
+}
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
   getNick: function(){
@@ -71,6 +75,10 @@ var AppStore = assign({}, EventEmitter.prototype, {
     return _appData.uiState || 'login';
   },
 
+  isWaiting: function(){
+    return _appData.isWaiting;
+  },
+
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
@@ -88,19 +96,31 @@ AppDispatcher.register(function(action) {
 
   switch(action.actionType) {
     case AppConstants.USER_LOGIN:
+      setWaiting(false);
       setUser(action.user);
       break;
 
+    case AppConstants.USER_LOGGING:
+      setWaiting(true);
+      break;
+
     case AppConstants.USER_LOGIN_ERROR:
+      setWaiting(false);
       setLoginErr(action.errMessage);
       setUiState('login');
       break;
 
     case AppConstants.USER_REGISTER:
+      setWaiting(false);
       setUser(action.user);
       break;
 
+    case AppConstants.USER_REGISTERING:
+      setWaiting(true);
+      break;
+
     case AppConstants.USER_REGISTER_ERROR:
+      setWaiting(false);
       setRegisterErr(action.errMessage);
       setUiState('register');
       break;

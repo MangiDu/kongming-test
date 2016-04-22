@@ -18,7 +18,8 @@ var Register = React.createClass({
   propTypes: {
     className: ReactPropTypes.string,
     err: ReactPropTypes.string,
-    goToLogin: ReactPropTypes.func.isRequired
+    goToLogin: ReactPropTypes.func.isRequired,
+    isWaiting: ReactPropTypes.bool
   },
 
   getInitialState: function(){
@@ -61,8 +62,8 @@ var Register = React.createClass({
           {err}
           <button
             className="btn btn-primary"
-            disabled={this.state.canSubmit ? '': 'disabled'}
-          >Register</button>
+            disabled={this._getBtnState()}
+          >{this._getSubmitBtnText()}</button>
           <a className="btn pull-right" onClick={this.props.goToLogin}>Login</a>
         </form>
       </div>
@@ -92,6 +93,22 @@ var Register = React.createClass({
 
   _focusNickInput: function(){
     this.refs[REF_MAP.nick].focus();
+  },
+
+  _getBtnState: function(){
+    return (this.state.canSubmit && !this.props.isWaiting) ? '': 'disabled';
+  },
+
+  _getSubmitBtnText: function(){
+    var tip = null;
+    if(this.props.isWaiting){
+      tip = (
+        <span>Hold a second ...</span>
+      );
+    }else{
+      tip = ('Register');
+    }
+    return tip;
   }
 })
 

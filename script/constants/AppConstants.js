@@ -5,7 +5,7 @@ module.exports = keyMirror({
   USER_LOGGING: null,         // logging
   USER_LOGIN_ERROR: null,     // login error
   USER_REGISTER: null,        // register success
-  USET_REGISTERING: null,     // registering
+  USER_REGISTERING: null,     // registering
   USER_REGISTER_ERROR: null,  // register error
   USER_LOGOUT: null,          // Logout success
   USER_SET_PASSWORD: null,    // get response after operation no matter success or fail

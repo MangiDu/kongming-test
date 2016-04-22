@@ -19,6 +19,10 @@ function actionPromise(type, data, success, error){
 var AppActions = {
 
   login: function(data){
+    AppDispatcher.dispatch({
+      actionType: AppConstants.USER_LOGGING
+    });
+
     actionPromise('login', data, function(data){
       AppDispatcher.dispatch({
         actionType: AppConstants.USER_LOGIN,
@@ -35,6 +39,10 @@ var AppActions = {
   },
 
   register: function(data){
+    AppDispatcher.dispatch({
+      actionType: AppConstants.USER_REGISTERING
+    });
+
     actionPromise('register', data, function(data){
     // when with a data.name, comes a error message
     // or register successfully then jump to home page

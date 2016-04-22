@@ -13,7 +13,8 @@ function getUserState(){
     loginErr: AppStore.getLoginErr(),
     registerErr: AppStore.getRegisterErr(),
     pwdMsg: AppStore.getPwdMsg(),
-    uiState: AppStore.getUiState() // used to judge whether login or register page, may need a better name
+    uiState: AppStore.getUiState(), // used to judge whether login or register page, may need a better name
+    isWaiting: AppStore.isWaiting()
   };
 }
 
@@ -54,6 +55,7 @@ var App = React.createClass({
                 <Login
                   err={this.state.loginErr}
                   goToRegister={this._goToRegister}
+                  isWaiting={this.state.isWaiting}
                 />
               </div>
             </div>
@@ -66,6 +68,7 @@ var App = React.createClass({
                 <Register
                   err={this.state.registerErr}
                   goToLogin={this._goToLogin}
+                  isWaiting={this.state.isWaiting}
                 />
               </div>
             </div>

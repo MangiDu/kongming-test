@@ -28,6 +28,9 @@ var Util = {
     options.data = data;
     options.success = success;
     options.error = error;
+    options.xhrFields = {
+      withCredentials: true
+    }
 
     return $.ajax(options);
   },

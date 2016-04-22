@@ -108,6 +108,14 @@ var AppActions = {
     AppDispatcher.dispatch({
       actionType: AppConstants.USER_GO_TO_LOGIN
     });
+  },
+
+  getUser: function(){
+    actionPromise('user', null, function(data){
+      console.log(data);
+    }, function(err){
+      console.log(err);
+    });
   }
 };
 

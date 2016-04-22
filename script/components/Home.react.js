@@ -43,6 +43,7 @@ var Home = React.createClass({
     e.preventDefault();
 
     var dataToSend = Util.formData(e.currentTarget);
+    UserAction.getUser();
     UserAction.setPassword(dataToSend);
 
     return false;

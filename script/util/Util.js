@@ -8,7 +8,7 @@ var API_MAP = {
     method: 'POST'
   },
   user: {
-    url: 'http://z005.kmtongji.com/api/user',
+    url: 'http://z005.kmtongji.com/api/users',
     method: 'GET'
   },
   setPassword: {

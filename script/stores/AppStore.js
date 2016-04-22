@@ -5,12 +5,7 @@ var AppConstants = require('../constants/AppConstants');
 
 var CHANGE_EVENT = 'change';
 
-var _appData = {
-  // user: null,
-  // loginErr: null,
-  // registerErr: null
-  // pwdMessage: null
-}
+var _appData = {}
 
 function clearAll(){
   _appData = {};
@@ -21,10 +16,12 @@ function setUser(user){
 }
 
 function setLoginErr(message){
+  clearErr();
   _appData.loginErr = message;
 }
 
 function setRegisterErr(message){
+  clearErr();
   _appData.registerErr = message;
 }
 
@@ -37,11 +34,16 @@ function setPwdMessage(message){
   _appData.pwdMessage = message;
 }
 
+function setUiState(state){
+  _appData.uiState = state;
+}
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
   getNick: function(){
     if(_appData.user){
-      return _appData.user.nick;
+      // use _id when no nick
+      return _appData.user.nick || ('User' + _appData.user._id);
     }
   },
 
@@ -62,6 +64,11 @@ var AppStore = assign({}, EventEmitter.prototype, {
 
   getPwdMsg: function(){
     return _appData.pwdMessage;
+  },
+
+  getUiState: function(){
+    // set 'login' as default page
+    return _appData.uiState || 'login';
   },
 
   emitChange: function() {
@@ -86,6 +93,7 @@ AppDispatcher.register(function(action) {
 
     case AppConstants.USER_LOGIN_ERROR:
       setLoginErr(action.errMessage);
+      setUiState('login');
       break;
 
     case AppConstants.USER_REGISTER:
@@ -94,6 +102,7 @@ AppDispatcher.register(function(action) {
 
     case AppConstants.USER_REGISTER_ERROR:
       setRegisterErr(action.errMessage);
+      setUiState('register');
       break;
 
     case AppConstants.USER_LOGOUT:
@@ -106,6 +115,16 @@ AppDispatcher.register(function(action) {
 
     case AppConstants.USER_LOG_PASTDUE:
       setPwdMessage(action.message);
+      break;
+
+    case AppConstants.USER_GO_TO_REGISTER:
+      clearErr();
+      setUiState('register');
+      break;
+
+    case AppConstants.USER_GO_TO_LOGIN:
+      clearErr();
+      setUiState('login');
       break;
 
     default:

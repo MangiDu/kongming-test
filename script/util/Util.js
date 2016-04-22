@@ -19,9 +19,10 @@ var API_MAP = {
     url: 'http://z005.kmtongji.com/api/logout',
     method: 'GET'
   }
-}
+};
 
 var Util = {
+
   userAction: function(action, data, success, error){
     var options = Object.create(API_MAP[action]);
     options.data = data;
@@ -30,6 +31,7 @@ var Util = {
 
     return $.ajax(options);
   },
+
   formData: function(form){
     var $form = $(form);
     var dataToSend = {};
@@ -38,6 +40,6 @@ var Util = {
     });
     return dataToSend;
   }
-}
+};
 
 module.exports = Util;

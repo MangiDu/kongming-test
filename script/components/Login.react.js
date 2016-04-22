@@ -15,7 +15,9 @@ var REF_MAP = {
 var Login = React.createClass({
 
   propTypes: {
-    err: ReactPropTypes.string
+    className: ReactPropTypes.string,
+    err: ReactPropTypes.string,
+    goToRegister: ReactPropTypes.func.isRequired
   },
 
   getInitialState: function(){
@@ -28,11 +30,13 @@ var Login = React.createClass({
     var err;
     if(this.props.err){
       err = (
-        <span>{this.props.err}</span>
+        <div className="alert alert-danger" role="alert"><span>{this.props.err}</span></div>
       );
     }
     return (
-      <div>
+      <div
+        className={this.props.className}
+      >
         <form onSubmit={this._onSubmit}>
           <legend>Login</legend>
           <UsernameInput
@@ -46,11 +50,13 @@ var Login = React.createClass({
             type="password"
             ref={REF_MAP.password}
           />
+          {err}
           <button
+            className="btn btn-primary"
             disabled={this.state.canSubmit ? '': 'disabled'}
             ref={REF_MAP.login}
           >Login</button>
-          {err}
+          <a className="btn pull-right" onClick={this.props.goToRegister}>Register</a>
         </form>
       </div>
     );

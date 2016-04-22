@@ -21,9 +21,12 @@ var BasicInput = React.createClass({
   render: function(){
     var err;
     return (
-      <div>
+      <div
+        className="form-group"
+      >
         <label htmlFor={this.props.name}>{this.props.name}</label>
         <input
+          className="form-control"
           name={this.props.name}
           type={this.props.type}
           value={this.state.value}

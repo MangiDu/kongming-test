@@ -29,9 +29,14 @@ var UsernameInput = React.createClass({
       );
     }
     return (
-      <div>
-        <label htmlFor={this.props.name}>{this.props.name}</label>
+      <div
+        className="form-group"
+      >
+        <label
+          htmlFor={this.props.name}
+        >{this.props.name}</label>
         <input
+          className="form-control"
           name={this.props.name}
           type={this.props.type}
           value={this.state.value}

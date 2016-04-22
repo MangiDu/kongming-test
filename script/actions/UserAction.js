@@ -36,7 +36,9 @@ var AppActions = {
 
   register: function(data){
     actionPromise('register', data, function(data){
-      if(data.name == 'UserExistsError'){
+    // when with a data.name, comes a error message
+    // or register successfully then jump to home page
+      if(data.name){
         AppDispatcher.dispatch({
           actionType: AppConstants.USER_REGISTER_ERROR,
           errMessage: data.message
@@ -74,6 +76,7 @@ var AppActions = {
       var err = $.parseJSON(err.responseText);
       switch(err.errno){
         case -100:
+        // can not make sure of message type , send an object containing both
           AppDispatcher.dispatch({
             actionType: AppConstants.USER_LOG_PASTDUE,
             message: {
@@ -85,6 +88,18 @@ var AppActions = {
 
       }
     })
+  },
+
+  goToRegister: function(){
+    AppDispatcher.dispatch({
+      actionType: AppConstants.USER_GO_TO_REGISTER
+    });
+  },
+
+  goToLogin: function(){
+    AppDispatcher.dispatch({
+      actionType: AppConstants.USER_GO_TO_LOGIN
+    });
   }
 };
 

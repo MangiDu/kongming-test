@@ -5,7 +5,9 @@ module.exports = {
     bundle: ['./script/main.js'],
     vendors: [
       'jquery',
+      'bootstrap',
       'react',
+      'react-dom',
       'flux'
     ]
   },
@@ -19,6 +21,9 @@ module.exports = {
     }, {
       test: /\.js$/,
       loader: 'jsx-loader'
+    },{
+      test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/,
+      loader: 'url-loader?importLoaders=1&limit=1000&name=./fonts/[name].[ext]'
     }]
   },
   resolve: {

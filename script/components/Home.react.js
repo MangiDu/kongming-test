@@ -15,20 +15,26 @@ var Home = React.createClass({
     var message;
     if(this.props.pwdMsg){
       message = (
-        <span>{this.props.pwdMsg.content}</span>
+        <div className="alert" role="alert"><span>{this.props.pwdMsg.content}</span></div>
       );
     }
     return (
-      <div>
-        <form onSubmit={this._onSubmit}>
-          <legend>setPassword</legend>
-          <BasicInput
-            name="password"
-            type="password"
-          />
-          <button>Set</button>
-          {message}
-        </form>
+      <div
+        className="panel panel-primary"
+      >
+        <div className="panel-heading">setPassword</div>
+        <div className="panel-body">
+          <form onSubmit={this._onSubmit}>
+            {message}
+            <BasicInput
+              name="password"
+              type="password"
+            />
+            <button
+              className="btn btn-default"
+            >Set</button>
+          </form>
+        </div>
       </div>
     );
   },

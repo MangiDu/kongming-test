@@ -24,6 +24,10 @@ var App = React.createClass({
     return getUserState();
   },
 
+  componentWillMount: function(){
+    UserAction.getUsers();
+  },
+
   componentDidMount: function() {
     AppStore.addChangeListener(this._onChange);
   },
@@ -38,7 +42,7 @@ var App = React.createClass({
       index = (
         <div className="row">
           <div className="page-header">
-            <h2>Hello, { this.state.nick }! ^_^</h2>
+            <h2>Hello { this.state.nick }! ^_^</h2>
             <button className="btn btn-default" onClick={this._onLogoutClick}>Logout</button>
           </div>
           <Home

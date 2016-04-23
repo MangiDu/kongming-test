@@ -11,5 +11,6 @@ module.exports = keyMirror({
   USER_SET_PASSWORD: null,    // get response after operation no matter success or fail
   USER_LOG_PASTDUE: null,     // log past due
   USER_GO_TO_REGISTER: null,  // show register page
-  USER_GO_TO_LOGIN:null       // show login page
+  USER_GO_TO_LOGIN:null,      // show login page
+  GET_USERS: null             // get list of registered users
 });

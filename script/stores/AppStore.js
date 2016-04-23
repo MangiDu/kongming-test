@@ -42,6 +42,14 @@ function setWaiting(isWaiting){
   _appData.isWaiting = isWaiting;
 }
 
+function setUsers(users){
+  _appData.users = users;
+}
+
+function setLoginState(bool){
+  _appData.isLoggedIn = bool;
+}
+
 var AppStore = assign({}, EventEmitter.prototype, {
 
   getNick: function(){
@@ -60,10 +68,8 @@ var AppStore = assign({}, EventEmitter.prototype, {
   },
 
   isLoggedIn: function(){
-    if(_appData.user && _appData.user._id){
-      return true;
-    }
-    return false;
+    var state = (_appData.user && _appData.user._id) ? true: false;
+    return _appData.isLoggedIn || state;
   },
 
   getPwdMsg: function(){
@@ -145,6 +151,11 @@ AppDispatcher.register(function(action) {
     case AppConstants.USER_GO_TO_LOGIN:
       clearErr();
       setUiState('login');
+      break;
+
+    case AppConstants.GET_USERS:
+      setUsers(action.users);
+      setLoginState(true);
       break;
 
     default:

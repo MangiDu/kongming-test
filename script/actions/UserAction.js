@@ -74,27 +74,19 @@ var AppActions = {
   },
 
   setPassword: function(data){
-  // {"errno":-100,"err":"未登录或登录已过期,请重新登录"}
     actionPromise('setPassword', data, function(data){
       AppDispatcher.dispatch({
         actionType: AppConstants.USER_SET_PASSWORD,
-        data: data
+        message: data
       });
     }, function(err){
       var err = $.parseJSON(err.responseText);
-      switch(err.errno){
-        case -100:
-        // can not make sure of message type , send an object containing both
-          AppDispatcher.dispatch({
-            actionType: AppConstants.USER_LOG_PASTDUE,
-            message: {
-              type: 'err',
-              content: err.err
-            }
-          });
-        default:
-
-      }
+      // {"errno":-100,"err":"未登录或登录已过期,请重新登录"}
+      // {"message":"No password was given","error":{"name":"MissingPasswordError","message":"No password was given"}}
+      AppDispatcher.dispatch({
+        actionType: AppConstants.USER_LOG_PASTDUE,
+        message: err
+      });
     })
   },
 
@@ -110,9 +102,12 @@ var AppActions = {
     });
   },
 
-  getUser: function(){
+  getUsers: function(){
     actionPromise('user', null, function(data){
-      console.log(data);
+      AppDispatcher.dispatch({
+        actionType: AppConstants.GET_USERS,
+        users: data
+      });
     }, function(err){
       console.log(err);
     });

@@ -15,7 +15,10 @@ var Home = React.createClass({
     var message;
     if(this.props.pwdMsg){
       message = (
-        <div className="alert" role="alert"><span>{this.props.pwdMsg.content}</span></div>
+        <div
+          className={(this.props.pwdMsg.errno == 0)? 'alert alert-success': 'alert alert-danger'}
+          role="alert"
+        ><span>{this.props.pwdMsg.msg || this.props.pwdMsg.err || this.props.pwdMsg.message}</span></div>
       );
     }
     return (
@@ -43,7 +46,6 @@ var Home = React.createClass({
     e.preventDefault();
 
     var dataToSend = Util.formData(e.currentTarget);
-    UserAction.getUser();
     UserAction.setPassword(dataToSend);
 
     return false;
